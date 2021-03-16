@@ -6,30 +6,59 @@ Page({
    * 页面的初始数据
    */
   data: {
-    filePath: ''
+    fileID: null
   },
   choosefile: function () {
     var that = this;
-    wx.chooseMessageFile ({
+    wx.chooseMessageFile({
       count: 1,
       type: 'file',
       success(res) {
         let path = res.tempFiles[0].path;
         console.log(res);
-        wx.cloud.uploadFile({
-          filePath:res.tempFiles[0].path,
-          cloudPath:"excel_storage/" + res.tempFiles[0].name,
-          // file
-        })
+        that.uploadFile(res)
+      // that.parseFile(path)
       }
     })
   },
-
+  uploadFile: function (path) {
+    var that = this;
+    wx.cloud.uploadFile({
+      filePath: path.tempFiles[0].path,
+      cloudPath: "excel_storage/" + path.tempFiles[0].name,
+      success(res) {
+        console.log(res)
+        that.downloadFile(res)
+      },
+      fail(res) {
+        console.log(res);
+      }
+    })
+  },
+  downloadFile: function (path) {
+    var that = this;
+    wx.cloud.downloadFile({
+      fileID: path.fileID,
+      success(res) {
+        console.log(res);
+        that.parseFile(res.tempFilePath)
+      }
+    })
+  },
+  parseFile: function (path) {
+    console.log(path);
+    var workbook = excel.readFile(path)
+    console.log(workbook);
+    var first = workbook.SheetNames[0]
+    console.log(first);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.cloud.downloadFile({
 
+    })
   },
 
   /**

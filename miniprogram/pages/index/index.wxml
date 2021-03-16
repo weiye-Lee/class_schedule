@@ -1,3 +1,4 @@
 <!--pages/index/index.wxml-->
 <text>pages/index/index.wxml</text>
 <button bindtap="choosefile">click</button>
+<button bindtap="downloadFile">download</button>
