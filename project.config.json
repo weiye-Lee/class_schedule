@@ -40,6 +40,7 @@
   "appid": "wx58ad2e0fc33b0c76",
   "projectname": "course-scheduling",
   "libVersion": "2.14.1",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
     "search": {
       "list": []

@@ -1,63 +1,37 @@
-// pages/index/index.js
-import excel from 'xlsx'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    fileID: null
+
   },
-  choosefile: function () {
-    var that = this;
-    wx.chooseMessageFile({
-      count: 1,
-      type: 'file',
-      success(res) {
-        let path = res.tempFiles[0].path;
-        console.log(res);
-        that.uploadFile(res)
-      // that.parseFile(path)
-      }
-    })
+
+  parseFile: function () {
+    const xlsx = require('node-xlsx')
+    // var obj= xlsx.parse('‪E:\迅雷谷歌下载\0-附件1：2020-2021-2通识教育网络课程.xls')
+    // console.log(obj)
+
   },
-  uploadFile: function (path) {
-    var that = this;
-    wx.cloud.uploadFile({
-      filePath: path.tempFiles[0].path,
-      cloudPath: "excel_storage/" + path.tempFiles[0].name,
-      success(res) {
-        console.log(res)
-        that.downloadFile(res)
-      },
-      fail(res) {
-        console.log(res);
-      }
-    })
-  },
-  downloadFile: function (path) {
-    var that = this;
-    wx.cloud.downloadFile({
-      fileID: path.fileID,
-      success(res) {
-        console.log(res);
-        that.parseFile(res.tempFilePath)
-      }
-    })
-  },
-  parseFile: function (path) {
-    console.log(path);
-    var workbook = excel.readFile(path)
-    console.log(workbook);
-    var first = workbook.SheetNames[0]
-    console.log(first);
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.cloud.downloadFile({
 
+    wx.cloud.callFunction({
+      name: 'parse',
+      data: {
+        fileID:"cloud://liweiye-dd1c64.6c69-liweiye-dd1c64-1258735017/excel_storage/学生个人课表_2018214185 (1).xls"
+      },
+      success: function (res) {
+        console.log("succ");
+        console.log(res);
+      },
+      fail: function (res) {
+        console.log('err');
+        console.log(res);
+      }
     })
   },
 
@@ -65,7 +39,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    // wx.cloud.callFunction({
+    //   // 云函数名称
+    //   name: 'test',
+    //   success: function (res) {
+    //     console.log(res.result.test01);
+    //   },
+    //   fail: console.error
+    // })
   },
 
   /**
