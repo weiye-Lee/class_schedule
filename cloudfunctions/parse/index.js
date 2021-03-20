@@ -5,7 +5,6 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  console.log(JSON.stringify(event))
   const res = await cloud.downloadFile({
     fileID: event.fileID
   })
@@ -35,7 +34,7 @@ exports.main = async (event, context) => {
     return course;
   }
   const filterStr = (str) => {
-    for (let i = 0; i < str.length; i++) {
+    for (var i = 0; i < str.length; i++) {
       if (str[i] == '') {
         str.splice(i, 1)
         i--;
@@ -47,14 +46,29 @@ exports.main = async (event, context) => {
   for (let i = 3; i < courseInfo.length - 1; i++) {
     allCourse[i-3] = Array();
     for (let j = 1; j < courseInfo[i].length; j++) {
-      allCourse[i][j] = resParse(courseInfo[i][j]);
+      allCourse[i-3][j] = resParse(courseInfo[i][j]);
     }
   }
-  allCourse[courseInfo.length - 1] = courseInfo[courseInfo.length - 1][1]
-
+  allCourse[courseInfo.length - 3] = courseInfo[courseInfo.length - 1][1]
+  if (allCourse != null) {
+    const db = cloud.database()
+    db.collection("courses").add({
+      data:{
+        courses:[
+          {
+            courseItem:allCourse,
+            isShow:true
+          }
+        ],
+        openId:event.userInfo.openId
+      }
+    })
+  }
   return {
+    event,
     courseInfo,
     sheets,
     allCourse,
   }
+
 };
