@@ -1,0 +1,15 @@
+<!--pages/test/coursetable/coursetable.wxml-->
+<!-- <view wx:for="{{12}}" class="timectn">{{item}}
+
+  <view wx:for="{{7}}" class="datectn">
+    星期{{item}}
+  </view>
+</view> -->
+<view wx:for="{{12}}" class="ctn">
+
+  <view wx:for="{{6}}">
+    <view class="item">
+      {{item}}
+    </view>
+  </view>
+</view>

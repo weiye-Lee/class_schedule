@@ -1,13 +1,36 @@
 <!--pages/index/index.wxml-->
-<text>pages/index/index.wxml</text>
-<button bindtap="choosefile">click</button>
-<button bindtap="uploadExcel">uploadExcel</button>
-<button bindtap="parseFile">parse</button>
-<view>
-  {{courses[0].courses[0].courseItem[2][1][0].name}}
-  <view wx:for="{{courses}}">
-    <view wx:for="{{item.courses}}">
-      {{item[0].courseItem.name}}
+<view hidden="{{!addIconIsShow}}" class="uploadctn">
+  <view class="uploadBtn" bindtap="uploadExcel">
+  <van-icon name="plus" size="80px" color="white" id="icon"/>
+</view>
+</view>
+ 
+<!-- 课程表列表 -->
+<view wx:for="{{coursesList}}" class="ctn" wx:for-item="list" wx:for-index="listIdx">
+  <view wx:for="{{list}}" wx:for-item="course" wx:for-index="courseIdx">
+    <view class="item">
+      <!-- 渲染节数和星期 -->
+      <view wx:if="{{courseIdx == 0}}">
+        <!-- {{listIdx}} -->
+        <view wx:if="{{listIdx != 0}}">
+          {{listIdx * 2 -1}}
+          <text>\n</text>
+          {{listIdx * 2}}
+        </view>
+      </view>
+      <view wx:elif="{{listIdx == 0}}">
+        <view wx:if="{{courseIdx != 0}}">
+          <view id="datectn">
+            星期{{courseIdx}}
+          </view>
+
+        </view>
+      </view>
+
+      <!-- 课程信息显示 -->
+      <view id="courseItem" wx:else>
+        {{course[0].name}}
+      </view>
     </view>
   </view>
 </view>

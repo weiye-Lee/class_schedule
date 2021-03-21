@@ -5,8 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    courses: Object(),
-    openid: ""
+    coursesList: Object(),
+    openid: "",
+    addIconIsShow: true
   },
 
   uploadExcel: function () {
@@ -92,18 +93,20 @@ Page({
       return v.toString(16);
     })
   },
+  // 用户上传多个课表情况怎么解决？
   onLoad: function () {
     let that = this
     // this.getOpenid()
     const db = wx.cloud.database();
     db.collection("courses").where({
       // openId: that.openId
-      // openId: "oG2Bd5asm4C6RkFresCev9RMjy34"
+      openId: "oG2Bd5asm4C6RkFresCev9RMjy34"
     }).get({
       success: function (res) {
-        console.log(res);
+        console.log(res.data[0].allCourse);
         that.setData({
-          courses: res.data
+          coursesList: res.data[0].allCourse,
+          addIconIsShow:false
         })
       },
       fail: function (res) {

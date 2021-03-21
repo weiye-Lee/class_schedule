@@ -1,3 +1,4 @@
+// todo 重构以下代码 ，2021.3.21 代码结构不堪
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
@@ -19,6 +20,9 @@ exports.main = async (event, context) => {
     const course = Array();
     let i = 0;
     var courseEach = res.split(/\n\n/)
+    const extractWeek = (weeks) => {
+      return weeks.match(/[0-9]{1,2}/g)
+    }
     for (let j = 0; j < courseEach.length; j++) {
       let courseInfo = courseEach[j].split(/\r?\n/)
       courseInfo = filterStr(courseInfo)
@@ -27,6 +31,8 @@ exports.main = async (event, context) => {
       courseItem.name = courseInfo[0]
       courseItem.teacher = courseInfo[1]
       courseItem.weeks = courseInfo[2]
+      courseItem.startWeek = extractWeek(courseInfo[2])[0]
+      courseItem.endWeek = extractWeek(courseInfo[2])[1]
       courseItem.area = courseInfo[3]
       course[i++] = courseItem
     }
@@ -44,23 +50,19 @@ exports.main = async (event, context) => {
   }
   let courseInfo = sheets[0].data
   for (let i = 3; i < courseInfo.length - 1; i++) {
-    allCourse[i-3] = Array();
+    allCourse[i - 3] = Array();
     for (let j = 1; j < courseInfo[i].length; j++) {
-      allCourse[i-3][j] = resParse(courseInfo[i][j]);
+      allCourse[i - 3][j] = resParse(courseInfo[i][j]);
     }
   }
   allCourse[courseInfo.length - 3] = courseInfo[courseInfo.length - 1][1]
   if (allCourse != null) {
     const db = cloud.database()
     db.collection("courses").add({
-      data:{
-        courses:[
-          {
-            courseItem:allCourse,
-            isShow:true
-          }
-        ],
-        openId:event.userInfo.openId
+      data: {
+        allCourse:  allCourse,
+        dafault: true,
+        openId: event.userInfo.openId
       }
     })
   }

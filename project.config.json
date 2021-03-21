@@ -33,8 +33,13 @@
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
     "userConfirmedBundleSwitch": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
+    "packNpmManually": true,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./package.json",
+        "miniprogramNpmDistDir": "./miniprogram/"
+      }
+    ],
     "minifyWXSS": true
   },
   "appid": "wx58ad2e0fc33b0c76",
@@ -55,13 +60,11 @@
       "list": []
     },
     "miniprogram": {
-      "list": [
-        {
-          "id": -1,
-          "name": "db guide",
-          "pathName": "pages/databaseGuide/databaseGuide"
-        }
-      ]
+      "list": [{
+        "id": -1,
+        "name": "db guide",
+        "pathName": "pages/databaseGuide/databaseGuide"
+      }]
     }
   }
 }

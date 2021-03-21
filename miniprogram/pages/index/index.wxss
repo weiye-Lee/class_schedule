@@ -1,1 +1,42 @@
 /* pages/index/index.wxss */
+.item {
+  border: thin solid red;
+  display: flex;
+  flex-direction: column;
+  /* flex-grow: 1; */
+  width: 90rpx;
+  height: 150rpx;
+}
+
+.ctn {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+#datectn {
+  font-size: 10px;
+  text-align: center;
+}
+
+#courseItem {
+  font-size: 10px;
+  text-align: center;
+  overflow: hidden;
+  margin: 2px;
+}
+.uploadctn {
+  /* border: 1px solid rebeccapurple; */
+  text-align: center;
+  height: 800rpx;
+}
+.uploadBtn {
+  background: chartreuse;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  text-align: center;  
+  margin: auto;
+  position: relative;
+  top: 400rpx;
+}
