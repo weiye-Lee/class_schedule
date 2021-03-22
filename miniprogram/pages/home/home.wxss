@@ -1,0 +1,16 @@
+/* pages/home/home.wxss */
+.uploadctn {
+  /* border: 1px solid rebeccapurple; */
+  text-align: center;
+  height: 800rpx;
+}
+.uploadBtn {
+  background: chartreuse;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  text-align: center;  
+  margin: auto;
+  position: relative;
+  top: 400rpx;
+}

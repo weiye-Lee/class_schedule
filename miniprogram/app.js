@@ -1,11 +1,8 @@
 //app.js
 App({
   globalData: {
-    course:{
-      name:"",
-      startWeek:0,
-      endWeek:0
-    }
+    coursesList:Object(),
+    openid:""
   },
   onLaunch: function () {
     if (!wx.cloud) {

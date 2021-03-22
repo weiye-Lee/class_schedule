@@ -1,9 +1,9 @@
 <!--pages/index/index.wxml-->
-<view hidden="{{!addIconIsShow}}" class="uploadctn">
+<!-- <view hidden="{{!addIconIsShow}}" class="uploadctn">
   <view class="uploadBtn" bindtap="uploadExcel">
   <van-icon name="plus" size="80px" color="white" id="icon"/>
 </view>
-</view>
+</view> -->
  
 <!-- 课程表列表 -->
 <view wx:for="{{coursesList}}" class="ctn" wx:for-item="list" wx:for-index="listIdx">
@@ -22,14 +22,16 @@
         <view wx:if="{{courseIdx != 0}}">
           <view id="datectn">
             星期{{courseIdx}}
+            
           </view>
 
         </view>
       </view>
 
       <!-- 课程信息显示 -->
-      <view id="courseItem" wx:else>
+      <view id="courseItem" wx:else bindtap="showPopup">
         {{course[0].name}}
+        <van-popup show="{{ show }}" bind:close="onClose">内容</van-popup>
       </view>
     </view>
   </view>

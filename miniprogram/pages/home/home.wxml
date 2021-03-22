@@ -1,0 +1,6 @@
+<!--pages/home/home.wxml-->
+<view class="uploadctn">
+  <view class="uploadBtn" bindtap="uploadExcel">
+  <van-icon name="plus" size="80px" color="white" id="icon"/>
+</view>
+</view>

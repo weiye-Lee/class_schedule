@@ -48,21 +48,24 @@ exports.main = async (event, context) => {
     }
     return str
   }
+  allCourse[0] = Array(8);
   let courseInfo = sheets[0].data
   for (let i = 3; i < courseInfo.length - 1; i++) {
-    allCourse[i - 3] = Array();
+    allCourse[i - 2] = Array();
     for (let j = 1; j < courseInfo[i].length; j++) {
-      allCourse[i - 3][j] = resParse(courseInfo[i][j]);
+      allCourse[i - 2][j] = resParse(courseInfo[i][j]);
     }
   }
-  allCourse[courseInfo.length - 3] = courseInfo[courseInfo.length - 1][1]
+  var remark = courseInfo[courseInfo.length - 1][1]
+  // allCourse[courseInfo.length - 3] = courseInfo[courseInfo.length - 1][1]
   if (allCourse != null) {
     const db = cloud.database()
     db.collection("courses").add({
       data: {
         allCourse:  allCourse,
         dafault: true,
-        openId: event.userInfo.openId
+        openId: event.userInfo.openId,
+        remark:remark
       }
     })
   }

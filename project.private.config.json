@@ -33,6 +33,12 @@
         {
           "name": "pages/test/coursetable/coursetable",
           "pathName": "pages/test/coursetable/coursetable",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/home/home",
+          "pathName": "pages/home/home",
           "scene": null
         }
       ]
