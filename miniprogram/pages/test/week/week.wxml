@@ -1,0 +1,13 @@
+<view>
+  <view class="weekSelCtn" bindtap="showPopup">
+    <text>第{{week}}周</text>
+    <van-icon name="arrow-down" />
+  </view>
+
+<van-popup show="{{ show }}" position="bottom" custom-style="height: 40%;" bind:close="onClose">
+  
+  <view>
+    <van-picker columns="{{ columns }}" bind:change="onChange" />
+  </view>
+</van-popup>
+</view>

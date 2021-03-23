@@ -21,7 +21,7 @@ exports.main = async (event, context) => {
     let i = 0;
     var courseEach = res.split(/\n\n/)
     const extractWeek = (weeks) => {
-      return weeks.match(/[0-9]{1,2}/g)
+      return parseInt(weeks.match(/[0-9]{1,2}/g))
     }
     for (let j = 0; j < courseEach.length; j++) {
       let courseInfo = courseEach[j].split(/\r?\n/)
@@ -57,6 +57,7 @@ exports.main = async (event, context) => {
     }
   }
   var remark = courseInfo[courseInfo.length - 1][1]
+  let time = Date.parse(new Date());
   // allCourse[courseInfo.length - 3] = courseInfo[courseInfo.length - 1][1]
   if (allCourse != null) {
     const db = cloud.database()
@@ -65,7 +66,9 @@ exports.main = async (event, context) => {
         allCourse:  allCourse,
         dafault: true,
         openId: event.userInfo.openId,
-        remark:remark
+        remark:remark,
+        week:1,
+        startTime:time
       }
     })
   }

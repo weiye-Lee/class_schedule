@@ -1,37 +1,73 @@
 <!--pages/index/index.wxml-->
-<!-- <view hidden="{{!addIconIsShow}}" class="uploadctn">
-  <view class="uploadBtn" bindtap="uploadExcel">
-  <van-icon name="plus" size="80px" color="white" id="icon"/>
-</view>
-</view> -->
- 
-<!-- 课程表列表 -->
-<view wx:for="{{coursesList}}" class="ctn" wx:for-item="list" wx:for-index="listIdx">
-  <view wx:for="{{list}}" wx:for-item="course" wx:for-index="courseIdx">
-    <view class="item">
-      <!-- 渲染节数和星期 -->
-      <view wx:if="{{courseIdx == 0}}">
-        <!-- {{listIdx}} -->
-        <view wx:if="{{listIdx != 0}}">
-          {{listIdx * 2 -1}}
-          <text>\n</text>
-          {{listIdx * 2}}
-        </view>
-      </view>
-      <view wx:elif="{{listIdx == 0}}">
-        <view wx:if="{{courseIdx != 0}}">
-          <view id="datectn">
-            星期{{courseIdx}}
-            
-          </view>
 
-        </view>
-      </view>
+<view>
+  <!-- 选择周次 -->
+  <view>
+    <view class="weekSelCtn" bindtap="showWeekPopup">
+      <text>第{{week}}周</text>
+      <van-icon name="arrow-down" />
+    </view>
 
-      <!-- 课程信息显示 -->
-      <view id="courseItem" wx:else bindtap="showPopup">
+    <van-popup show="{{ weekShow }}" position="bottom" custom-style="height: 40%;" bind:close="WeekonClose">
+
+      <view>
+        <van-picker columns="{{ columns }}" bind:change="onChange" />
+      </view>
+    </van-popup>
+  </view>
+  <!-- 点击课程显示课程详细信息 -->
+  <view>
+    <van-popup show="{{ show }}" bind:close="onClose">
+      <view>
         {{course[0].name}}
-        <van-popup show="{{ show }}" bind:close="onClose">内容</van-popup>
+        <text>\n</text>
+        {{course[0].area}}
+        <text>\n</text>
+        {{course[0].teacher}}
+        <text>\n</text>
+        {{course[0].weeks}}
+      </view>
+    </van-popup>
+  </view>
+  <!-- 课程表列表 -->
+  <view wx:for="{{coursesList}}" class="ctn" wx:for-item="list" wx:for-index="listIdx">
+    <view wx:for="{{list}}" wx:for-item="course" wx:for-index="courseIdx">
+      <view class="item">
+        <!-- 渲染节数和星期 -->
+        <view wx:if="{{courseIdx == 0}}">
+          <view wx:if="{{listIdx != 0}}">
+            {{listIdx * 2 -1}}
+            <text>\n</text>
+            {{listIdx * 2}}
+          </view>
+        </view>
+        <view wx:elif="{{listIdx == 0}}">
+          <view wx:if="{{courseIdx != 0}}">
+            <view id="datectn">
+              星期{{courseIdx}}
+
+            </view>
+
+          </view>
+        </view>
+
+        <!-- 课程信息显示 -->
+        <view wx:else>
+          <view wx:for="{{course}}" wx:for-item="item" wx:for-index="sectionIdx">
+            <view hidden="{{!(item.startWeek <= week && item.endWeek >= week)}}" id="courseItem" bindtap="showPopup" data-reply-x="{{listIdx}}" data-reply-y="{{courseIdx}}">
+              {{item.endWeek >= week}}
+              <!-- {{item.name}} -->
+              <!-- {{item.startWeek}} -->
+            </view>
+          </view>
+          <!-- <view id="courseItem" wx:else bindtap="showPopup" data-reply-x="{{listIdx}}" data-reply-y="{{courseIdx}}">
+          {{course[0].name}}
+        </view> -->
+        </view>
+
+
+        <view>
+        </view>
       </view>
     </view>
   </view>

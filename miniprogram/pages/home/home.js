@@ -53,6 +53,7 @@ Page({
       success: function (res) {
         console.log("succ");
         console.log(res);
+        that.navTo();
 
       },
       fail: function (res) {
@@ -69,6 +70,28 @@ Page({
       return v.toString(16);
     })
   },
+  navTo: function() {
+    var that = this
+    const db = wx.cloud.database();
+    db.collection ("courses").where({
+      // openId: that.openId
+      openId: that.data.openid
+    }).get({
+      success: function (res) {
+        console.log(res.data[0]);
+        app.globalData.coursesList = res.data[0].allCourse,
+        app.globalData.remark = res.data[0].remark,
+        app.globalData.week = 18,
+        // app.globalData.week = parseInt( res.data[0].week + (Date.parse(new Date()) - res.data[0].startTime)/604800000)
+        wx.redirectTo({
+          url: '../index/index',
+        })
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -83,22 +106,27 @@ Page({
             openid: openid,
             addIconIsShow: false
           })
-          const db = wx.cloud.database();
-          db.collection("courses").where({
-            // openId: that.openId
-            openId: that.data.openid
-          }).get({
-            success: function (res) {
-              console.log(res.data[0].allCourse);
-              app.globalData.coursesList = res.data[0].allCourse
-              wx.redirectTo({
-                url: '../index/index',
-              })
-            },
-            fail: function (res) {
-              console.log(res);
-            }
-          })
+          that.navTo()
+
+
+          // const db = wx.cloud.database();
+          // db.collection ("courses").where({
+          //   // openId: that.openId
+          //   openId: that.data.openid
+          // }).get({
+          //   success: function (res) {
+          //     console.log(res.data[0]);
+          //     app.globalData.coursesList = res.data[0].allCourse,
+          //     app.globalData.remark = res.data[0].remark,
+          //     app.globalData.week = parseInt( res.data[0].week + (Date.parse(new Date()) - res.data[0].startTime)/604800000)
+          //     wx.redirectTo({
+          //       url: '../index/index',
+          //     })
+          //   },
+          //   fail: function (res) {
+          //     console.log(res);
+          //   }
+          // })
 
 
         }

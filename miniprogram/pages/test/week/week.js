@@ -1,28 +1,42 @@
-// pages/test/regular/regular.js
+// pages/test/week/week.js
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
+    show: false,
+    columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    week:1
+  },
 
+  showPopup() {
+    this.setData({
+      show: true
+    });
+  },
+
+  onClose() {
+    this.setData({
+      show: false
+    });
+  },
+  onChange(event) {
+    console.log(event);
+    this.setData({
+      week: event.detail.value
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var ans = "6-9[周]"
-    var arr = ans.match(/[0-9]{1,2}/g)
-    console.log(arr);
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    var timestamp = Date.parse(new Date());
-    console.log(timestamp);
+
   },
 
   /**

@@ -2,7 +2,9 @@
 App({
   globalData: {
     coursesList:Object(),
-    openid:""
+    openid:"",
+    remark:"",
+    week:1
   },
   onLaunch: function () {
     if (!wx.cloud) {

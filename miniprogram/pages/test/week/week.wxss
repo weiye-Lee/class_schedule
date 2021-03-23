@@ -1,0 +1,11 @@
+/* pages/test/week/week.wxss */
+.weekSelCtn{
+  background: darkgray;
+  margin: auto;
+  width: max-content;
+  border-radius: 10px;
+}
+
+.weekSelCtn text{
+  padding: 5px;
+}

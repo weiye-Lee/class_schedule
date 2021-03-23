@@ -39,6 +39,18 @@
         {
           "name": "pages/home/home",
           "pathName": "pages/home/home",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/test/week/week",
+          "pathName": "pages/test/week/week",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/test/weekbind/weekbind",
+          "pathName": "pages/test/weekbind/weekbind",
           "scene": null
         }
       ]

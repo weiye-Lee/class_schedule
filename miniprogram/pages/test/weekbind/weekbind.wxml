@@ -1,0 +1,4 @@
+<!--pages/test/weekbind/weekbind.wxml-->
+<input type="text" placeholder="请输入标题" placeholder-class="placeholder" name="title" />
+
+<text hidden="{{1 == 1 && 2 == 2}}">hello world</text>
