@@ -42,7 +42,7 @@
     ],
     "minifyWXSS": true
   },
-  "appid": "wx58ad2e0fc33b0c76",
+  "appid": "wxad8493d41c640ba2",
   "projectname": "course-scheduling",
   "libVersion": "2.14.1",
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",

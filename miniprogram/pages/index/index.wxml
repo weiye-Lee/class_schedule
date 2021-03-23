@@ -54,11 +54,9 @@
           <view wx:for="{{course}}" wx:for-item="item" wx:for-index="sectionIdx">
             <view hidden="{{!(item.startWeek <= week && item.endWeek >= week)}}" bindtap="showPopup" data-reply-x="{{listIdx}}" data-reply-y="{{courseIdx}}" data-reply-Z="{{sectionIdx}}">
               {{item.name}}
-              <!-- {{item.name}} -->
-              <!-- {{item.startWeek}} -->
             </view>
           </view>
-          <!-- <view id="courseItem" wx:else bindtap="showPopup" data-reply-x="{{listIdx}}" data-reply-y="{{courseIdx}}">
+          <!-- <view bindtap="showPopup" data-reply-x="{{listIdx}}" data-reply-y="{{courseIdx}}">
           {{course[0].name}}
         </view> -->
         </view>
