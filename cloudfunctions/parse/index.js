@@ -21,7 +21,7 @@ exports.main = async (event, context) => {
     let i = 0;
     var courseEach = res.split(/\n\n/)
     const extractWeek = (weeks) => {
-      return parseInt(weeks.match(/[0-9]{1,2}/g))
+      return weeks.match(/[0-9]{1,2}/g)
     }
     for (let j = 0; j < courseEach.length; j++) {
       let courseInfo = courseEach[j].split(/\r?\n/)

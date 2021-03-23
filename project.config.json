@@ -21,7 +21,7 @@
     "compileHotReLoad": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
-    "useApiHostProcess": false,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -60,11 +60,13 @@
       "list": []
     },
     "miniprogram": {
-      "list": [{
-        "id": -1,
-        "name": "db guide",
-        "pathName": "pages/databaseGuide/databaseGuide"
-      }]
+      "list": [
+        {
+          "id": -1,
+          "name": "db guide",
+          "pathName": "pages/databaseGuide/databaseGuide"
+        }
+      ]
     }
   }
 }

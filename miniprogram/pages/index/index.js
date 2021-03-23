@@ -10,10 +10,11 @@ Page({
     popupShow: false,
     x: 0,
     y: 0,
+    z: 0,
     course: Object(),
     show: false,
     weekShow: false,
-    columns: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19.20],
+    columns: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
     week:1
   },
 
@@ -23,9 +24,23 @@ Page({
     });
   },
   WeekonClose() {
+    var that = this
+    console.log(app.globalData.openid);
     this.setData({
       weekShow: false
     });
+    const db = wx.cloud.database()
+    db.collection("courses").where({
+      openId: app.globalData.openid,
+
+    }).update({
+      data: {
+        week: that.data.week
+      },
+      success: function(res) {
+        console.log(res);
+      }
+    })
   },
   onClose() {
     this.setData({
@@ -39,12 +54,12 @@ Page({
     })
   },
   showPopup(event) {
-    console.log(event.target.dataset.replyX);
+    console.log(event.target);
     var list = app.globalData.coursesList
-    console.log(list[event.target.dataset.replyX][event.target.dataset.replyY]);
+    console.log(list[event.target.dataset.replyX][event.target.dataset.replyY][event.target.dataset.replyZ]);
 
     this.setData({
-      course: list[event.target.dataset.replyX][event.target.dataset.replyY]
+      course: list[event.target.dataset.replyX][event.target.dataset.replyY][event.target.dataset.replyZ]
     })
     this.setData({
       show: true

@@ -19,13 +19,13 @@
   <view>
     <van-popup show="{{ show }}" bind:close="onClose">
       <view>
-        {{course[0].name}}
+        {{course.name}}
         <text>\n</text>
-        {{course[0].area}}
+        {{course.area}}
         <text>\n</text>
-        {{course[0].teacher}}
+        {{course.teacher}}
         <text>\n</text>
-        {{course[0].weeks}}
+        {{course.weeks}}
       </view>
     </van-popup>
   </view>
@@ -45,17 +45,15 @@
           <view wx:if="{{courseIdx != 0}}">
             <view id="datectn">
               星期{{courseIdx}}
-
             </view>
-
           </view>
         </view>
 
         <!-- 课程信息显示 -->
-        <view wx:else>
+        <view wx:else id="courseItem" >
           <view wx:for="{{course}}" wx:for-item="item" wx:for-index="sectionIdx">
-            <view hidden="{{!(item.startWeek <= week && item.endWeek >= week)}}" id="courseItem" bindtap="showPopup" data-reply-x="{{listIdx}}" data-reply-y="{{courseIdx}}">
-              {{item.endWeek >= week}}
+            <view hidden="{{!(item.startWeek <= week && item.endWeek >= week)}}" bindtap="showPopup" data-reply-x="{{listIdx}}" data-reply-y="{{courseIdx}}" data-reply-Z="{{sectionIdx}}">
+              {{item.name}}
               <!-- {{item.name}} -->
               <!-- {{item.startWeek}} -->
             </view>

@@ -81,8 +81,9 @@ Page({
         console.log(res.data[0]);
         app.globalData.coursesList = res.data[0].allCourse,
         app.globalData.remark = res.data[0].remark,
-        app.globalData.week = 18,
-        // app.globalData.week = parseInt( res.data[0].week + (Date.parse(new Date()) - res.data[0].startTime)/604800000)
+        // app.globalData.week = 18,
+        app.globalData.openid = res.data[0].openId
+        app.globalData.week = parseInt( res.data[0].week + (Date.parse(new Date()) - res.data[0].startTime)/604800000)
         wx.redirectTo({
           url: '../index/index',
         })
